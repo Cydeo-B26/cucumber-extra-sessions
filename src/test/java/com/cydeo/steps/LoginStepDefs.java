@@ -24,9 +24,7 @@ public class LoginStepDefs {
         String username = ConfigurationReader.getProperty("driver_username");
         String password = ConfigurationReader.getProperty("driver_password");
 
-        loginPage.userNameField.sendKeys(username);
-        loginPage.passwordField.sendKeys(password);
-        loginPage.loginButton.click();
+        loginPage.login(username,password);
 
     }
     @Then("user should be able to login")
@@ -38,5 +36,24 @@ public class LoginStepDefs {
 
         Assert.assertEquals(expectedTitle,actualTitle);
 
+    }
+
+    @When("user enters the sales manager information")
+    public void user_enters_the_sales_manager_information() {
+        String username = ConfigurationReader.getProperty("sales_manager_username");
+        String password = ConfigurationReader.getProperty("sales_manager_password");
+
+     loginPage.login(username,password);
+
+
+
+    }
+
+    @When("user enters the store manager information")
+    public void user_enters_the_store_manager_information() {
+        String username = ConfigurationReader.getProperty("store_manager_username");
+        String password = ConfigurationReader.getProperty("store_manager_password");
+
+        loginPage.login(username,password);
     }
 }
