@@ -1,0 +1,232 @@
+
+Today Schedule
+
+	- Plugins 
+		- Gherkin
+		- Cucumber For Java
+
+	- Cucumber BDD
+		- TestRunner
+			- @RunWith
+			- CucumberOptions
+				1. dryRun
+				2. tags 
+				3. glue
+				4. features
+				...
+
+		- StepDefinitions
+			1. Hooks
+
+		- Feature
+			1. Parameterization
+			2. Gherkin
+			3. Background
+
+	- Tasks
+
+
+
+Cucumber - BDD Behaviour Driven Development
+
+	A process to ensure collaboration between 3 amigos : Business , Dev , QA  to have common shared understanding on the aceptence criteria that matter most to the customers
+
+ BDD frameworks have 2 layers/sides.
+
+
+
+    #1- Business side --> feature files
+        - We write the features in Gherkin language (which is English)
+        - It is understanble for technical and non-technical people in the team
+
+        - Given, When, Then, And etc
+
+    #2- Implementation side --> step_definitions package
+        - We implement each "scenario" STEP BY STEP
+        - Each step is different from each other
+        - Once a step is created, it is basically a re-usable method (from the step_definition side)
+
+   NOTE :
+   	    ---> Cucumber is BDD tool, that allows us to implement BDD approach.
+		---> Cucumber does NOT have assertions that comes with it.
+		---> That's why we are using JUnit (Unit testing tool) to use assertions come from that library.
+
+ 
+
+CukesRunner ==============
+   
+    - The whole project is controlled by the Runner (CukesRunner) class
+    - Thats why we need to make sure Runner class is connected to rest of the project
+    - Meaning:
+        - CukesRunner class should know where the step definitions are (glue)
+        - CukesRunner class should know where the feature files are stored (feature)
+        - CukesRunner class should know whether I want to dryRun true or false (dryRun)
+        - CukesRunner class should know what kind of report I want to generate (plugin)
+        - CukesRunner class should know which tests I want to run (tags)
+
+
+   Q : How does Runner class know where to find and compare "feature" files and "step definitions"?
+   
+	    - We provide paths in our Runner class @CucumberOptions
+
+	    - @Cucumber Options -- stands for specifiying cucumber test parameters, location of stepdefs / feature etc.
+
+
+	    glue = the path of the step_definitions package
+	    
+	    features = the path of the directory where all .feature files are stored
+
+		== 1. DryRun 	==
+
+		- dryRun decides if we actually want to run the code implemetaion (java+selenium) or if we want to just get the snippets(unimplemented step definition methods)
+
+		    - it accepts a boolean value:
+
+		    - if dryRun is "true":
+		        - it means it is "turned ON"
+		        - when its true, it will NOT execute the code implementation
+		        - it will not open the browser and run the java+selenium code etc.
+		        - it will ONLY check if there are any steps in feature file that does not have matching snippet in the step_definitions package
+
+		    - if dryRun is "false":
+		        - it means it is "turned OFF"
+		        - your code will be executed as normal
+		        - and if there are unimplemented steps, it still provides snippets for them.
+
+		== 2. Tags ==
+
+		 
+		    - Tags are used to group different Feature files and scenarios together to be able to run them in different test suites.
+		        - @SmokeTest Suite
+		        - @Regression Suite
+
+
+		    - If we put the tag on top of the feature file it effects the whole feature file. It will run all scenarios in that feature file
+		    - If we put the tag on top of a scenario(s), it will only run those specific scenario(s)
+
+
+
+StepDefinitons ================
+
+	==1. Hooks ==
+
+		Methods that execute before and after scenarios. Hook will always run, even if the scenario fails.
+
+		There is no connection between feature files and hooks. 
+		Hooks will run always so we need to be careful about what we use inside.
+
+
+		Import 
+			- import io.cucumber.java.After;
+			- import io.cucumber.java.Before;
+
+
+
+
+
+
+
+
+
+Feature ================
+ 
+ What is a FEATURE?
+    
+    - Agile story/User story
+    - We create "Test Cases" from "Agile Stories"
+    - We create "Scenarios" from Features.
+
+- What is a scenario?
+   
+    - EACH TEST CASE WE CREATE FROM AGILE STORY.
+    - BUT WE DONT CALL THEM TEST CASES IN BDD, WE CALL THEM SCENARIOS.
+
+- Can we have more than 1 agile story under 1 feature file.
+    
+    - Technically you can, but ideally it is better to seperate.
+
+- What is a step?
+   
+    - Steps are how we create/re-create that specific scenario.
+    - Each step is like a re-usable method.
+    - We can write once, and re-use as much as we need it.
+    - When re-using a step, make sure it fits perfectly with the flow of that specific scenario.
+
+- What is a snippet?
+    - Unimplemented step definition methods that are provided to us from Cucumber by default.
+
+1. == Parameters ==
+	
+	Parameters in cucumber allows us to use data from feature file to step definitions.
+	When you typing your steps if you use double quotes cucumber will understand you are passing string, and it will create step definition based on that. 
+
+	So this usage allow us to reuse same step with different input.
+
+2. == Gherkin ==
+
+		Given ---> Describe an initial context 
+	    When  ---> Describe an event 
+	    Then  ---> Describe an expected outcome 
+	    
+3. == BackGround ==
+  
+     - will allow us to have repeating set-up steps ONLY 1 time in the feature file.
+     
+     - if we write in once, we don't have to have seperately for each scenario repeatedly.
+
+     - Background will only be applied to "Scenario"s in the current .feature file.
+    
+     - We can only create pre-condition 
+
+     - We can not make it run after each Scenario.
+
+     - When we use Background, we MUST make sure ALL of the scenarios are able to continue where the steps from Background left off.
+
+
+
+
+Questions :
+
+
+- Does it matter the order of snippets in step_definitions?
+   
+    - No. Because the Cucumber will be running the code in the order of the feature file and steps
+
+- Differences between "Background" and "Hooks"?
+
+	 - Background only applies to current feature file.
+	 - Hooks can be applied to the whole project.
+	 - Hooks can be also limited to apply to certain scenarios with certain @tags ("value" keyword)
+	 - We can also create running order using "order" keyword.
+
+
+Folder Structure
+
+
+ - projectNameFolder
+         - src
+             - test
+                 - java
+                     - com.cybertek 
+                         - pages
+                             - HomePage.java
+                             - SearchPage.java
+                             - 
+                         - runners
+                             - CukesRunner.java
+                         - utilities
+                             - Driver.java
+                             - BrowserUtils.java
+                             - ConfigurationReader.java
+                         - step_definitions
+                             - HomePage_StepDefinitions
+                             - SearchPage_StepDefinitions
+                             -
+
+                 - resources
+                     - features
+                         - search.feature
+                         - login.feature
+
+         - pom.xml
+         - configuration.properties
