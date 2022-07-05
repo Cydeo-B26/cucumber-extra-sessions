@@ -230,3 +230,17 @@ Folder Structure
 
          - pom.xml
          - configuration.properties
+
+
+
+Day 02
+
+    -- Parameter
+    -- Datatable
+             - List
+             - Map
+             - List of Map
+             - List of List
+    -- Scenario Outline
+
+
