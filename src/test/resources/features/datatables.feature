@@ -1,7 +1,7 @@
 Feature: Examples for DataTable
 
   # DataTable-List
-
+  @wip
   Scenario: Menu Options for driver
     Given user is on the login page
     When user enters the "driver" information
