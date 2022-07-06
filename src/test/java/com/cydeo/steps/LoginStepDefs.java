@@ -56,4 +56,13 @@ public class LoginStepDefs {
 
         loginPage.login(username,password);
     }
+
+    @When("user enters the {string} information")
+    public void user_enters_the_information(String userType) {
+
+        loginPage.loginDynamic(userType);
+
+
+
+    }
 }
