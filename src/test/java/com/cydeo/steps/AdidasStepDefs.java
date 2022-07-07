@@ -45,4 +45,35 @@ public class AdidasStepDefs {
         }
 
     }
+
+
+
+    @Then("User should be able to see expected prices in following products with listOflist")
+    public void user_should_be_able_to_see_expected_prices_in_following_products_with_list_oflist(List<List<String>> productDetails) {
+
+
+        for (List<String> productDetail : productDetails) {
+            System.out.println(" ======== Product Details ======== ");
+            System.out.println(productDetail.get(0));  //  Category
+
+
+            // click category
+            adidasPage.clickCategory(productDetail.get(0));
+
+            // get product price
+            String actualPrice = adidasPage.getProductPrice(productDetail.get(1));
+
+
+            System.out.println(productDetail.get(1));  // Product
+
+
+            // get me expectedPrice
+            String expectedPrice = productDetail.get(2);
+            System.out.println(productDetail.get(2));  // price
+
+
+            Assert.assertEquals(expectedPrice,actualPrice);
+        }
+    }
+
 }
