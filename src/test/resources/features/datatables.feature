@@ -26,6 +26,21 @@ Feature: Examples for DataTable
       | System             |
 
 
+            # DataTable-List
+  Scenario: Menu Options for salesmanager
+    Given user is on the login page
+    When user enters the "store manager" information
+    Then user should be able to see following modules
+      | Dashboards         |
+      | Fleet              |
+      | Customers          |
+      | Sales              |
+      | Activities         |
+      | Marketing          |
+      | Reports & Segments |
+      | System             |
+
+
   @wip
   Scenario: Login with given information
     Given user is on the login page
