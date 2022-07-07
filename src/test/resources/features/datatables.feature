@@ -37,7 +37,7 @@ Feature: Examples for DataTable
       | lastname  | Doe  |
 
 
-# DataTable - ListOfMap
+@listOfMap
   Scenario: verify each product price
     Given User is on the HomePage
     Then User should be able to see expected prices in following products
@@ -66,3 +66,9 @@ Feature: Examples for DataTable
       | Laptops   | MacBook air       | 700           |
       | Monitors  | Apple monitor 24  | 400           |
       | Monitors  | ASUS Full HD      | 230           |
+
+
+
+
+
+    #Map<String,List<String,String>>
