@@ -1,5 +1,5 @@
-@scenarioOutline
 Feature: Simple examples about Scenario Outline
+
   Scenario Outline: Menu Options for <userType>
     Given user is on the login page
     When user enters the "<userType>" information
@@ -21,7 +21,7 @@ Feature: Simple examples about Scenario Outline
       | store_manager |
 
 
-
+  @scenarioOutline
   Scenario Outline: Login with given information for <user>
     Given user is on the login page
     When user enters below credentials
@@ -33,8 +33,8 @@ Feature: Simple examples about Scenario Outline
 
     Examples:
       | user           | firstName | lastName |
-      | user10         | Toney     | Hegmann  |
-      | storemanager85 | Marcella  | Huels    |
+      | user10         | John      | Doe      |
+      | storemanager85 | John      | Doe      |
 
 
 
