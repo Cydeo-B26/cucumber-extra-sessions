@@ -1,11 +1,13 @@
 package com.cydeo.steps;
 
 import com.cydeo.pages.AdidasPage;
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,21 @@ public class AdidasStepDefs {
 
 
     }
+    @Then("Under {string} category User should be able to see the list of following products")
+    public void under_category_user_should_be_able_to_see_the_list_of_following_products(String category, List<String> expectedProducts) {
+
+        adidasPage.clickCategory(category);
+
+        List<WebElement> produtcsElements = adidasPage.products;
+
+        List<String> actualProductList = BrowserUtils.getElementsText(produtcsElements);
+
+        Assert.assertEquals(expectedProducts,actualProductList);
+
+    }
+
+
+
     @Then("User should be able to see expected prices in following products")
     public void user_should_be_able_to_see_expected_prices_in_following_products(List<Map<String,String>> productDetails) {
 
