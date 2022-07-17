@@ -81,7 +81,7 @@ Feature: Examples for DataTable
 
     #Map<String,List<String,String>>
 
-  @MapOfList
+  @regression
   Scenario: Verify students name in discord
     Then User should be able to see following names in their groups
       | Group1 | Gulay Turgut | Shina                 | Ziba               |
