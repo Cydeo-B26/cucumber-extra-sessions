@@ -52,6 +52,20 @@ public class Driver {
                         e.printStackTrace();
                     }
                     break;
+                case "remote-firefox":
+                    try {
+                        // assign your grid server address
+                        String gridAddress = "52.90.101.17";
+                        URL url = new URL("http://"+ gridAddress + ":4444/wd/hub");
+                        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+                        desiredCapabilities.setBrowserName("firefox");
+                        driverPool.set(new RemoteWebDriver(url, desiredCapabilities));
+                        //driverPool.set(new RemoteWebDriver(new URL("http://0.0.0.0:4444/wd/hub"),desiredCapabilities));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver());
