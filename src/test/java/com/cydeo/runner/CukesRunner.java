@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features" ,
         glue = "com/cydeo/steps",
          dryRun = false,
-        tags = ""
+        tags = "@smoke"
 )
 public class CukesRunner {
 }
@@ -80,5 +80,23 @@ Can we run this project in grid parallelly ?
       Smoke-firefox
                     test -Dcucumber.filter.tags=@smoke -Dbrowser=remote-firefox
 
+
+why we are using remote if we running on jenkins ?
+
+    - JENKINS --> main responsiblity of jenkins is managing journey application
+            Browsers are really resource consuming that s we need dedicated server to run
+    - GRID    --> REMOTE execution
+
+
+
+
+How to run parallely ?
+
+    - Add surefire with parallel setup
+    - Make sure you have more than one feature
+    - Driver needs to be eligible for Parallel Run  --> InheritableThreadLocal
+    - Run from MAVEN
+
+NOTE --> It is not possible to run from CUKESRUNNER paralelly
 
  */

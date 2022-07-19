@@ -11,7 +11,7 @@ Feature:Users should be able to login
     When user enters the driver information
     Then user should be able to login
 
-
+@smoke
   Scenario: Login as sales manager
     When user enters the sales manager information
     Then user should be able to login
